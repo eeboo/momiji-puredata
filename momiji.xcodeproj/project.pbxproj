@@ -6,8 +6,15 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2C2477001F1A09E100A28793 /* m_pd.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2476FF1F1A09E100A28793 /* m_pd.h */; };
+		2C2477021F1A0A6600A28793 /* momiji.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C2477011F1A0A6600A28793 /* momiji.c */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		2C2476F81F1A06EC00A28793 /* libmomiji.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmomiji.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C2476F81F1A06EC00A28793 /* momiji.pd_darwin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = momiji.pd_darwin; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C2476FF1F1A09E100A28793 /* m_pd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m_pd.h; sourceTree = "<group>"; };
+		2C2477011F1A0A6600A28793 /* momiji.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = momiji.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +31,8 @@
 		2C2476EF1F1A06EB00A28793 = {
 			isa = PBXGroup;
 			children = (
+				2C2476FF1F1A09E100A28793 /* m_pd.h */,
+				2C2477011F1A0A6600A28793 /* momiji.c */,
 				2C2476F91F1A06EC00A28793 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -31,7 +40,7 @@
 		2C2476F91F1A06EC00A28793 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C2476F81F1A06EC00A28793 /* libmomiji.dylib */,
+				2C2476F81F1A06EC00A28793 /* momiji.pd_darwin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -43,6 +52,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2477001F1A09E100A28793 /* m_pd.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,7 +73,7 @@
 			);
 			name = momiji;
 			productName = momiji;
-			productReference = 2C2476F81F1A06EC00A28793 /* libmomiji.dylib */;
+			productReference = 2C2476F81F1A06EC00A28793 /* momiji.pd_darwin */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -102,6 +112,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2477021F1A0A6600A28793 /* momiji.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +123,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -147,7 +159,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -156,6 +168,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -185,6 +198,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -194,8 +208,13 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				PRODUCT_NAME = momiji;
 			};
 			name = Debug;
 		};
@@ -204,8 +223,14 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				EXECUTABLE_EXTENSION = pd_darwin;
+				EXECUTABLE_PREFIX = "";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
+				"OTHER_LDFLAGS[arch=*]" = "";
+				PRODUCT_NAME = momiji;
 			};
 			name = Release;
 		};
